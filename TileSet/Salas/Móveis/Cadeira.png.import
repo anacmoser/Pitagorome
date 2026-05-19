@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ntosk35v212j"
-path="res://.godot/imported/ExamplePlayerSprite.png-1a0713d9e212d397b05cebe8c8b9b26c.ctex"
+uid="uid://d1ccubsbpitdn"
+path="res://.godot/imported/Cadeira.png-956166b0c624730906db3d308800a703.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Player/Sprites/ExamplePlayerSprite.png"
-dest_files=["res://.godot/imported/ExamplePlayerSprite.png-1a0713d9e212d397b05cebe8c8b9b26c.ctex"]
+source_file="res://TileSet/Salas/Móveis/Cadeira.png"
+dest_files=["res://.godot/imported/Cadeira.png-956166b0c624730906db3d308800a703.ctex"]
 
 [params]
 
