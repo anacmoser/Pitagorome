@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://da3cwo0mqdcr3"
-path="res://.godot/imported/diretor.png-7e6c54f03ea6a0b57f0f1d3e371d5115.ctex"
+uid="uid://vbor5cfsr42i"
+path="res://.godot/imported/Cadeira-frente.png-c6d4570e499a47facdb4b642c3fb725d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TileSet/Personagens/diretor.png"
-dest_files=["res://.godot/imported/diretor.png-7e6c54f03ea6a0b57f0f1d3e371d5115.ctex"]
+source_file="res://TileSet/Salas/Móveis/cadeira/Cadeira-frente.png"
+dest_files=["res://.godot/imported/Cadeira-frente.png-c6d4570e499a47facdb4b642c3fb725d.ctex"]
 
 [params]
 
