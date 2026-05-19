@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dtv6uua17qfh3"]
 
 [ext_resource type="Texture2D" uid="uid://da3cwo0mqdcr3" path="res://TileSet/Personagens/diretor.png" id="1_wpm55"]
+[ext_resource type="Script" uid="uid://dqgnso7nr7dca" path="res://diretor.gd" id="2_fgmjj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wpm55"]
 
@@ -16,3 +17,4 @@ shape = SubResource("CircleShape2D_wpm55")
 texture_filter = 1
 scale = Vector2(4.25, 4.375)
 texture = ExtResource("1_wpm55")
+script = ExtResource("2_fgmjj")
