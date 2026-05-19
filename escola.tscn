@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dtv6uua17qfh3"]
+
+[ext_resource type="Texture2D" uid="uid://da3cwo0mqdcr3" path="res://TileSet/Personagens/diretor.png" id="1_wpm55"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wpm55"]
+
+[node name="Sala" type="Node2D" unique_id=2100168691]
+position = Vector2(321, 154)
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1080876785]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1417615772]
+shape = SubResource("CircleShape2D_wpm55")
+
+[node name="Diretor" type="Sprite2D" parent="CharacterBody2D" unique_id=1330549292]
+texture_filter = 1
+scale = Vector2(4.25, 4.375)
+texture = ExtResource("1_wpm55")
