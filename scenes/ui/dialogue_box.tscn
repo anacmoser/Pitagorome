@@ -1,0 +1,146 @@
+[gd_scene load_steps=5 format=3 uid="uid://c8m3qf9v1p0d1"]
+
+[ext_resource type="Script" path="res://scripts/dialogue_box.gd" id="1_dlgbox"]
+[ext_resource type="FontFile" path="res://assets/fonts/Montserrat-Bold.ttf" id="2_font_bold"]
+[ext_resource type="FontFile" path="res://assets/fonts/Montserrat-Regular.ttf" id="3_font_reg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dlg"]
+bg_color = Color(0.94902, 0.909804, 0.815686, 0.96)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.290196, 0.403922, 0.254902, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.25)
+shadow_size = 4
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_input"]
+bg_color = Color(0.984314, 0.960784, 0.878431, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.729412, 0.807843, 0.596078, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="DialogueBox" type="CanvasLayer"]
+layer = 10
+script = ExtResource("1_dlgbox")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="DialoguePanel" type="PanelContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = -110.0
+offset_right = -32.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_dlg")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/DialoguePanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/DialoguePanel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="SpeakerLabel" type="Label" parent="Control/DialoguePanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.45, 0.05, 1)
+theme_override_fonts/font = ExtResource("2_font_bold")
+theme_override_font_sizes/font_size = 14
+text = "Coordenadora"
+
+[node name="TextLabel" type="Label" parent="Control/DialoguePanel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.25, 0.25, 0.25, 1)
+theme_override_fonts/font = ExtResource("3_font_reg")
+theme_override_font_sizes/font_size = 12
+text = "Texto do diálogo aqui..."
+autowrap_mode = 3
+
+[node name="PromptLabel" type="Label" parent="Control/DialoguePanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
+theme_override_fonts/font = ExtResource("3_font_reg")
+theme_override_font_sizes/font_size = 9
+text = "▼ Pressione [Espaço / Enter / E] para continuar"
+horizontal_alignment = 2
+
+[node name="NameInputModal" type="PanelContainer" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -140.0
+offset_top = -60.0
+offset_right = 140.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dlg")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/NameInputModal"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/NameInputModal/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TitleLabel" type="Label" parent="Control/NameInputModal/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.290196, 0.403922, 0.254902, 1)
+theme_override_fonts/font = ExtResource("2_font_bold")
+theme_override_font_sizes/font_size = 13
+text = "Como devemos te chamar?"
+horizontal_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="Control/NameInputModal/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
+theme_override_fonts/font = ExtResource("3_font_reg")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_input")
+text = "Diretor(a)"
+placeholder_text = "Digite seu nome..."
+alignment = 1
+
+[node name="ConfirmButton" type="Button" parent="Control/NameInputModal/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font_bold")
+theme_override_font_sizes/font_size = 11
+text = "Confirmar"

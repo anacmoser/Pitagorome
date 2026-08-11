@@ -1,0 +1,184 @@
+[gd_scene load_steps=18 format=3 uid="uid://b8c9qf7v2p1x9"]
+
+[ext_resource type="PackedScene" path="res://scenes/characters/player.tscn" id="1_player"]
+[ext_resource type="PackedScene" path="res://scenes/ui/dialogue_box.tscn" id="2_dlgbox"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="3_hud"]
+[ext_resource type="PackedScene" path="res://scenes/ui/challenge_modal.tscn" id="4_modal"]
+[ext_resource type="Script" path="res://scripts/door.gd" id="5_door"]
+[ext_resource type="Script" path="res://scripts/interactable_object.gd" id="6_obj"]
+[ext_resource type="Texture2D" path="res://assets/props/library_shelf.png" id="7_shelf"]
+[ext_resource type="Texture2D" path="res://assets/props/teacher_desk.png" id="8_desk"]
+[ext_resource type="Texture2D" path="res://assets/props/globe.png" id="9_globe"]
+[ext_resource type="Texture2D" path="res://assets/props/plant_palm.png" id="10_plant"]
+[ext_resource type="FontFile" path="res://assets/fonts/Montserrat-Bold.ttf" id="11_font"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_top"]
+size = Vector2(340, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_left"]
+size = Vector2(20, 260)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_right"]
+size = Vector2(20, 260)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_bottom_l"]
+size = Vector2(140, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_bottom_r"]
+size = Vector2(140, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_shelf"]
+size = Vector2(30, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_desk"]
+size = Vector2(60, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_door"]
+size = Vector2(40, 20)
+
+[node name="BibliotecaScene" type="Node2D"]
+y_sort_enabled = true
+
+[node name="MapBackground" type="Node2D" parent="."]
+
+[node name="Floor" type="ColorRect" parent="MapBackground"]
+offset_left = -150.0
+offset_top = -100.0
+offset_right = 150.0
+offset_bottom = 100.0
+color = Color(0.82, 0.72, 0.58, 1)
+
+[node name="ReadingCarpet" type="ColorRect" parent="MapBackground"]
+offset_left = -70.0
+offset_top = -30.0
+offset_right = 70.0
+offset_bottom = 45.0
+color = Color(0.70, 0.65, 0.55, 0.8)
+
+[node name="WallTop" type="ColorRect" parent="MapBackground"]
+offset_left = -150.0
+offset_top = -120.0
+offset_right = 150.0
+offset_bottom = -90.0
+color = Color(0.38, 0.48, 0.35, 1)
+
+[node name="MapWalls" type="StaticBody2D" parent="."]
+
+[node name="Top" type="CollisionShape2D" parent="MapWalls"]
+position = Vector2(0, -100)
+shape = SubResource("RectangleShape2D_wall_top")
+
+[node name="Left" type="CollisionShape2D" parent="MapWalls"]
+position = Vector2(-160, 0)
+shape = SubResource("RectangleShape2D_wall_left")
+
+[node name="Right" type="CollisionShape2D" parent="MapWalls"]
+position = Vector2(160, 0)
+shape = SubResource("RectangleShape2D_wall_right")
+
+[node name="BottomLeft" type="CollisionShape2D" parent="MapWalls"]
+position = Vector2(-95, 110)
+shape = SubResource("RectangleShape2D_wall_bottom_l")
+
+[node name="BottomRight" type="CollisionShape2D" parent="MapWalls"]
+position = Vector2(95, 110)
+shape = SubResource("RectangleShape2D_wall_bottom_r")
+
+[node name="Furniture" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Shelf1" type="StaticBody2D" parent="Furniture"]
+position = Vector2(-110, -75)
+
+[node name="Sprite2D" type="Sprite2D" parent="Furniture/Shelf1"]
+texture = ExtResource("7_shelf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Furniture/Shelf1"]
+position = Vector2(0, 10)
+shape = SubResource("RectangleShape2D_shelf")
+
+[node name="Shelf2" type="StaticBody2D" parent="Furniture"]
+position = Vector2(-70, -75)
+
+[node name="Sprite2D" type="Sprite2D" parent="Furniture/Shelf2"]
+texture = ExtResource("7_shelf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Furniture/Shelf2"]
+position = Vector2(0, 10)
+shape = SubResource("RectangleShape2D_shelf")
+
+[node name="Shelf3" type="StaticBody2D" parent="Furniture"]
+position = Vector2(70, -75)
+
+[node name="Sprite2D" type="Sprite2D" parent="Furniture/Shelf3"]
+texture = ExtResource("7_shelf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Furniture/Shelf3"]
+position = Vector2(0, 10)
+shape = SubResource("RectangleShape2D_shelf")
+
+[node name="Shelf4" type="StaticBody2D" parent="Furniture"]
+position = Vector2(110, -75)
+
+[node name="Sprite2D" type="Sprite2D" parent="Furniture/Shelf4"]
+texture = ExtResource("7_shelf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Furniture/Shelf4"]
+position = Vector2(0, 10)
+shape = SubResource("RectangleShape2D_shelf")
+
+[node name="StudyTable1" type="StaticBody2D" parent="Furniture"]
+position = Vector2(0, -10)
+
+[node name="Sprite2D" type="Sprite2D" parent="Furniture/StudyTable1"]
+texture = ExtResource("8_desk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Furniture/StudyTable1"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_desk")
+
+[node name="Globe" type="Sprite2D" parent="Furniture/StudyTable1"]
+position = Vector2(20, -12)
+texture = ExtResource("9_globe")
+
+[node name="Plant" type="Sprite2D" parent="Furniture"]
+position = Vector2(130, 45)
+texture = ExtResource("10_plant")
+
+[node name="SpawnFromCorridor" type="Marker2D" parent="."]
+position = Vector2(0, 55)
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector2(0, 55)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(2.5, 2.5)
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
+
+[node name="DoorToCorridor" type="Area2D" parent="."]
+position = Vector2(0, 105)
+script = ExtResource("5_door")
+target_scene = "res://scenes/school/school_corridor.tscn"
+target_spawn_id = "SpawnFromLibrary"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorToCorridor"]
+shape = SubResource("RectangleShape2D_door")
+
+[node name="DoorLabel" type="Label" parent="DoorToCorridor"]
+offset_left = -50.0
+offset_top = -24.0
+offset_right = 50.0
+offset_bottom = -11.0
+theme_override_colors/font_color = Color(0.98, 0.96, 0.88, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_fonts/font = ExtResource("11_font")
+theme_override_font_sizes/font_size = 7
+text = "▼ Corredor"
+horizontal_alignment = 1
+
+[node name="HUD" parent="." instance=ExtResource("3_hud")]
+
+[node name="DialogueBox" parent="." instance=ExtResource("2_dlgbox")]
+
+[node name="ChallengeModal" parent="." instance=ExtResource("4_modal")]

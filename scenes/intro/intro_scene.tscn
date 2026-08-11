@@ -1,0 +1,202 @@
+[gd_scene load_steps=19 format=3 uid="uid://b6m4qf1v9p5z2"]
+
+[ext_resource type="PackedScene" path="res://scenes/characters/player.tscn" id="1_player"]
+[ext_resource type="PackedScene" path="res://scenes/characters/npc_coordenadora.tscn" id="2_coord"]
+[ext_resource type="PackedScene" path="res://scenes/ui/dialogue_box.tscn" id="3_dlgbox"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="4_hud"]
+[ext_resource type="PackedScene" path="res://scenes/ui/challenge_modal.tscn" id="5_modal"]
+[ext_resource type="Script" path="res://scripts/door.gd" id="6_door"]
+[ext_resource type="Texture2D" path="res://assets/props/teacher_desk.png" id="7_desk"]
+[ext_resource type="Texture2D" path="res://assets/props/bookshelf_wood.png" id="8_shelf"]
+[ext_resource type="Texture2D" path="res://assets/props/red_sofa.png" id="9_sofa"]
+[ext_resource type="Texture2D" path="res://assets/props/plant_ficus.png" id="10_plant"]
+[ext_resource type="Texture2D" path="res://assets/props/wall_clock.png" id="11_clock"]
+[ext_resource type="Texture2D" path="res://assets/props/diploma.png" id="12_diploma"]
+[ext_resource type="FontFile" path="res://assets/fonts/Montserrat-Bold.ttf" id="13_font"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_top"]
+size = Vector2(340, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_left"]
+size = Vector2(20, 260)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_right"]
+size = Vector2(20, 260)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_bottom_l"]
+size = Vector2(140, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_bottom_r"]
+size = Vector2(140, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_desk"]
+size = Vector2(60, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_shelf"]
+size = Vector2(30, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sofa"]
+size = Vector2(44, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_door"]
+size = Vector2(40, 20)
+
+[node name="IntroScene" type="Node2D"]
+y_sort_enabled = true
+
+[node name="RoomBackground" type="Node2D" parent="."]
+
+[node name="Floor" type="ColorRect" parent="RoomBackground"]
+offset_left = -150.0
+offset_top = -90.0
+offset_right = 150.0
+offset_bottom = 100.0
+color = Color(0.84, 0.74, 0.60, 1)
+
+[node name="Carpet" type="ColorRect" parent="RoomBackground"]
+offset_left = -55.0
+offset_top = -35.0
+offset_right = 55.0
+offset_bottom = 40.0
+color = Color(0.68, 0.76, 0.62, 0.9)
+
+[node name="WallTop" type="ColorRect" parent="RoomBackground"]
+offset_left = -150.0
+offset_top = -110.0
+offset_right = 150.0
+offset_bottom = -80.0
+color = Color(0.42, 0.52, 0.38, 1)
+
+[node name="WallBorder" type="ColorRect" parent="RoomBackground"]
+offset_left = -150.0
+offset_top = -83.0
+offset_right = 150.0
+offset_bottom = -80.0
+color = Color(0.28, 0.36, 0.25, 1)
+
+[node name="Clock" type="Sprite2D" parent="RoomBackground"]
+position = Vector2(0, -95)
+texture = ExtResource("11_clock")
+
+[node name="DiplomaLeft" type="Sprite2D" parent="RoomBackground"]
+position = Vector2(-60, -95)
+texture = ExtResource("12_diploma")
+
+[node name="DiplomaRight" type="Sprite2D" parent="RoomBackground"]
+position = Vector2(60, -95)
+texture = ExtResource("12_diploma")
+
+[node name="RoomWalls" type="StaticBody2D" parent="."]
+
+[node name="ColTop" type="CollisionShape2D" parent="RoomWalls"]
+position = Vector2(0, -90)
+shape = SubResource("RectangleShape2D_wall_top")
+
+[node name="ColLeft" type="CollisionShape2D" parent="RoomWalls"]
+position = Vector2(-160, 10)
+shape = SubResource("RectangleShape2D_wall_left")
+
+[node name="ColRight" type="CollisionShape2D" parent="RoomWalls"]
+position = Vector2(160, 10)
+shape = SubResource("RectangleShape2D_wall_right")
+
+[node name="ColBottomLeft" type="CollisionShape2D" parent="RoomWalls"]
+position = Vector2(-95, 110)
+shape = SubResource("RectangleShape2D_wall_bottom_l")
+
+[node name="ColBottomRight" type="CollisionShape2D" parent="RoomWalls"]
+position = Vector2(95, 110)
+shape = SubResource("RectangleShape2D_wall_bottom_r")
+
+[node name="Furniture" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="DirectorDesk" type="StaticBody2D" parent="Furniture"]
+position = Vector2(0, -40)
+
+[node name="Sprite2D" type="Sprite2D" parent="Furniture/DirectorDesk"]
+texture = ExtResource("7_desk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Furniture/DirectorDesk"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_desk")
+
+[node name="BookshelfLeft" type="StaticBody2D" parent="Furniture"]
+position = Vector2(-115, -60)
+
+[node name="Sprite2D" type="Sprite2D" parent="Furniture/BookshelfLeft"]
+texture = ExtResource("8_shelf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Furniture/BookshelfLeft"]
+position = Vector2(0, 10)
+shape = SubResource("RectangleShape2D_shelf")
+
+[node name="BookshelfRight" type="StaticBody2D" parent="Furniture"]
+position = Vector2(115, -60)
+
+[node name="Sprite2D" type="Sprite2D" parent="Furniture/BookshelfRight"]
+texture = ExtResource("8_shelf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Furniture/BookshelfRight"]
+position = Vector2(0, 10)
+shape = SubResource("RectangleShape2D_shelf")
+
+[node name="WaitingSofa" type="StaticBody2D" parent="Furniture"]
+position = Vector2(-115, 20)
+
+[node name="Sprite2D" type="Sprite2D" parent="Furniture/WaitingSofa"]
+texture = ExtResource("9_sofa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Furniture/WaitingSofa"]
+shape = SubResource("RectangleShape2D_sofa")
+
+[node name="PlantLeft" type="Sprite2D" parent="Furniture"]
+position = Vector2(-135, -25)
+texture = ExtResource("10_plant")
+
+[node name="PlantRight" type="Sprite2D" parent="Furniture"]
+position = Vector2(135, -25)
+texture = ExtResource("10_plant")
+
+[node name="SpawnFromCorridor" type="Marker2D" parent="."]
+position = Vector2(0, 55)
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector2(0, 15)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(2.5, 2.5)
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
+
+[node name="NPCCoordenadora" parent="." instance=ExtResource("2_coord")]
+position = Vector2(50, 15)
+auto_start_dialogue = true
+is_intro_scene = true
+
+[node name="DoorToCorridor" type="Area2D" parent="."]
+position = Vector2(0, 105)
+script = ExtResource("6_door")
+target_scene = "res://scenes/school/school_corridor.tscn"
+target_spawn_id = "SpawnFromDirector"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorToCorridor"]
+shape = SubResource("RectangleShape2D_door")
+
+[node name="DoorLabel" type="Label" parent="DoorToCorridor"]
+offset_left = -50.0
+offset_top = -26.0
+offset_right = 50.0
+offset_bottom = -13.0
+theme_override_colors/font_color = Color(0.98, 0.96, 0.88, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_fonts/font = ExtResource("13_font")
+theme_override_font_sizes/font_size = 8
+text = "▼ Corredor Principal"
+horizontal_alignment = 1
+
+[node name="HUD" parent="." instance=ExtResource("4_hud")]
+
+[node name="DialogueBox" parent="." instance=ExtResource("3_dlgbox")]
+
+[node name="ChallengeModal" parent="." instance=ExtResource("5_modal")]

@@ -1,0 +1,229 @@
+[gd_scene load_steps=19 format=3 uid="uid://m1c9qf4v8p2x7"]
+
+[ext_resource type="PackedScene" path="res://scenes/characters/player.tscn" id="1_player"]
+[ext_resource type="PackedScene" path="res://scenes/characters/npc_professor.tscn" id="2_prof"]
+[ext_resource type="PackedScene" path="res://scenes/ui/dialogue_box.tscn" id="3_dlgbox"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="4_hud"]
+[ext_resource type="PackedScene" path="res://scenes/ui/challenge_modal.tscn" id="5_modal"]
+[ext_resource type="Script" path="res://scripts/door.gd" id="6_door"]
+[ext_resource type="Script" path="res://scripts/interactable_object.gd" id="7_obj"]
+[ext_resource type="Texture2D" path="res://assets/props/blackboard.png" id="8_board"]
+[ext_resource type="Texture2D" path="res://assets/props/teacher_desk.png" id="9_tdesk"]
+[ext_resource type="Texture2D" path="res://assets/props/student_desk.png" id="10_sdesk"]
+[ext_resource type="Texture2D" path="res://assets/props/bookshelf_wood.png" id="11_shelf"]
+[ext_resource type="Texture2D" path="res://assets/props/schedule_chart.png" id="12_chart"]
+[ext_resource type="FontFile" path="res://assets/fonts/Montserrat-Bold.ttf" id="13_font"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_top"]
+size = Vector2(320, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_right"]
+size = Vector2(20, 260)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_bottom"]
+size = Vector2(320, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_left_t"]
+size = Vector2(20, 110)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_left_b"]
+size = Vector2(20, 110)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_teacher_desk"]
+size = Vector2(60, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_student_desk"]
+size = Vector2(20, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_shelf"]
+size = Vector2(30, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_door"]
+size = Vector2(20, 40)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_board"]
+radius = 28.0
+
+[node name="MathClassroom" type="Node2D"]
+y_sort_enabled = true
+
+[node name="MapBackground" type="Node2D" parent="."]
+
+[node name="Floor" type="ColorRect" parent="MapBackground"]
+offset_left = -140.0
+offset_top = -100.0
+offset_right = 140.0
+offset_bottom = 100.0
+color = Color(0.83, 0.73, 0.58, 1)
+
+[node name="WallTop" type="ColorRect" parent="MapBackground"]
+offset_left = -140.0
+offset_top = -120.0
+offset_right = 140.0
+offset_bottom = -90.0
+color = Color(0.38, 0.48, 0.35, 1)
+
+[node name="MapWalls" type="StaticBody2D" parent="."]
+
+[node name="Top" type="CollisionShape2D" parent="MapWalls"]
+position = Vector2(0, -100)
+shape = SubResource("RectangleShape2D_wall_top")
+
+[node name="Right" type="CollisionShape2D" parent="MapWalls"]
+position = Vector2(150, 0)
+shape = SubResource("RectangleShape2D_wall_right")
+
+[node name="Bottom" type="CollisionShape2D" parent="MapWalls"]
+position = Vector2(0, 110)
+shape = SubResource("RectangleShape2D_wall_bottom")
+
+[node name="LeftTop" type="CollisionShape2D" parent="MapWalls"]
+position = Vector2(-150, -55)
+shape = SubResource("RectangleShape2D_wall_left_t")
+
+[node name="LeftBottom" type="CollisionShape2D" parent="MapWalls"]
+position = Vector2(-150, 55)
+shape = SubResource("RectangleShape2D_wall_left_b")
+
+[node name="Furniture" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Blackboard" type="Sprite2D" parent="Furniture"]
+position = Vector2(0, -95)
+texture = ExtResource("8_board")
+
+[node name="TeacherDesk" type="StaticBody2D" parent="Furniture"]
+position = Vector2(0, -65)
+
+[node name="Sprite2D" type="Sprite2D" parent="Furniture/TeacherDesk"]
+texture = ExtResource("9_tdesk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Furniture/TeacherDesk"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_teacher_desk")
+
+[node name="Desk1" type="StaticBody2D" parent="Furniture"]
+position = Vector2(-55, -10)
+
+[node name="Sprite2D" type="Sprite2D" parent="Furniture/Desk1"]
+texture = ExtResource("10_sdesk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Furniture/Desk1"]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_student_desk")
+
+[node name="Desk2" type="StaticBody2D" parent="Furniture"]
+position = Vector2(55, -10)
+
+[node name="Sprite2D" type="Sprite2D" parent="Furniture/Desk2"]
+texture = ExtResource("10_sdesk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Furniture/Desk2"]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_student_desk")
+
+[node name="Desk3" type="StaticBody2D" parent="Furniture"]
+position = Vector2(-55, 45)
+
+[node name="Sprite2D" type="Sprite2D" parent="Furniture/Desk3"]
+texture = ExtResource("10_sdesk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Furniture/Desk3"]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_student_desk")
+
+[node name="Desk4" type="StaticBody2D" parent="Furniture"]
+position = Vector2(55, 45)
+
+[node name="Sprite2D" type="Sprite2D" parent="Furniture/Desk4"]
+texture = ExtResource("10_sdesk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Furniture/Desk4"]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_student_desk")
+
+[node name="Bookshelf" type="StaticBody2D" parent="Furniture"]
+position = Vector2(110, -75)
+
+[node name="Sprite2D" type="Sprite2D" parent="Furniture/Bookshelf"]
+texture = ExtResource("11_shelf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Furniture/Bookshelf"]
+position = Vector2(0, 10)
+shape = SubResource("RectangleShape2D_shelf")
+
+[node name="ScheduleBoard" type="StaticBody2D" parent="Furniture"]
+position = Vector2(80, -95)
+script = ExtResource("7_obj")
+object_name = "Quadro de Horários"
+hint_text = "[E] Resolver Horários"
+is_challenge_trigger = true
+challenge_task_id = 2
+challenge_type = "choice"
+challenge_title = "📐 Tarefa 2: Conflito no Horário"
+challenge_context = "Duas turmas (1º Ano A e 2º Ano B) foram agendadas na Sala de Matemática no mesmo horário! Cada professor só pode dar 1 aula por vez e o Laboratório de Ciências está livre."
+challenge_question = "Como diretor(a), qual é a reorganização lógica correta?"
+challenge_options = ["A) Alocar o 2º Ano B no Laboratório de Ciências com o Prof. de Ciências.", "B) Juntar as duas turmas na mesma sala com o Prof. de Matemática.", "C) Cancelar a aula do 1º Ano A para liberar a sala."]
+challenge_correct_index = 0
+challenge_success_feedback = "Excelente! Ao realocar o 2º Ano B no Laboratório de Ciências, respeitamos a capacidade das salas e a disponibilidade dos professores sem prejudicar nenhuma turma!"
+
+[node name="Sprite2D" type="Sprite2D" parent="Furniture/ScheduleBoard"]
+texture = ExtResource("12_chart")
+
+[node name="InteractionArea" type="Area2D" parent="Furniture/ScheduleBoard"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Furniture/ScheduleBoard/InteractionArea"]
+shape = SubResource("CircleShape2D_board")
+
+[node name="HintLabel" type="Label" parent="Furniture/ScheduleBoard"]
+offset_left = -40.0
+offset_top = -24.0
+offset_right = 40.0
+offset_bottom = -11.0
+theme_override_colors/font_color = Color(0.98, 0.95, 0.8, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_fonts/font = ExtResource("13_font")
+theme_override_font_sizes/font_size = 7
+text = "[E] Horários"
+horizontal_alignment = 1
+
+[node name="SpawnFromCorridor" type="Marker2D" parent="."]
+position = Vector2(-95, 0)
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector2(-95, 0)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(2.5, 2.5)
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
+
+[node name="NPCProfessor" parent="." instance=ExtResource("2_prof")]
+position = Vector2(0, -40)
+
+[node name="DoorToCorridor" type="Area2D" parent="."]
+position = Vector2(-140, 0)
+script = ExtResource("6_door")
+target_scene = "res://scenes/school/school_corridor.tscn"
+target_spawn_id = "SpawnFromMath"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorToCorridor"]
+shape = SubResource("RectangleShape2D_door")
+
+[node name="DoorLabel" type="Label" parent="DoorToCorridor"]
+offset_left = -40.0
+offset_top = -24.0
+offset_right = 40.0
+offset_bottom = -11.0
+theme_override_colors/font_color = Color(0.98, 0.96, 0.88, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_fonts/font = ExtResource("13_font")
+theme_override_font_sizes/font_size = 7
+text = "◄ Corredor"
+horizontal_alignment = 1
+
+[node name="HUD" parent="." instance=ExtResource("4_hud")]
+
+[node name="DialogueBox" parent="." instance=ExtResource("3_dlgbox")]
+
+[node name="ChallengeModal" parent="." instance=ExtResource("5_modal")]

@@ -1,0 +1,217 @@
+[gd_scene format=3 uid="uid://cx8v3k5m2p1ra"]
+
+[ext_resource type="Script" path="res://scripts/challenge_modal.gd" id="1_modal"]
+[ext_resource type="FontFile" path="res://assets/fonts/Montserrat-Bold.ttf" id="2_font_bold"]
+[ext_resource type="FontFile" path="res://assets/fonts/Montserrat-Regular.ttf" id="3_font_reg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_modal"]
+bg_color = Color(0.96, 0.93, 0.85, 0.98)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.290196, 0.403922, 0.254902, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_size = 8
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_opt"]
+bg_color = Color(0.88, 0.92, 0.82, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.45, 0.58, 0.4, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_input"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.73, 0.81, 0.6, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="ChallengeModal" type="CanvasLayer"]
+layer = 12
+script = ExtResource("1_modal")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ModalPanel" type="PanelContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -220.0
+offset_top = -140.0
+offset_right = 220.0
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_modal")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/ModalPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 14
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/ModalPanel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TitleLabel" type="Label" parent="Control/ModalPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.290196, 0.403922, 0.254902, 1)
+theme_override_fonts/font = ExtResource("2_font_bold")
+theme_override_font_sizes/font_size = 14
+text = "📐 Desafio: Conflito no Horário"
+horizontal_alignment = 1
+
+[node name="ContextLabel" type="Label" parent="Control/ModalPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.4, 0.4, 1)
+theme_override_fonts/font = ExtResource("3_font_reg")
+theme_override_font_sizes/font_size = 10
+text = "Duas turmas foram marcadas na mesma sala no mesmo horário..."
+autowrap_mode = 3
+
+[node name="QuestionLabel" type="Label" parent="Control/ModalPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
+theme_override_fonts/font = ExtResource("2_font_bold")
+theme_override_font_sizes/font_size = 11
+text = "Qual é a melhor reorganização para resolver o conflito?"
+autowrap_mode = 3
+
+[node name="OptionsContainer" type="VBoxContainer" parent="Control/ModalPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Option1" type="Button" parent="Control/ModalPanel/MarginContainer/VBoxContainer/OptionsContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.25, 0.2, 1)
+theme_override_fonts/font = ExtResource("3_font_reg")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_opt")
+text = "A) Opção 1"
+alignment = 0
+autowrap_mode = 3
+
+[node name="Option2" type="Button" parent="Control/ModalPanel/MarginContainer/VBoxContainer/OptionsContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.25, 0.2, 1)
+theme_override_fonts/font = ExtResource("3_font_reg")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_opt")
+text = "B) Opção 2"
+alignment = 0
+autowrap_mode = 3
+
+[node name="Option3" type="Button" parent="Control/ModalPanel/MarginContainer/VBoxContainer/OptionsContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.25, 0.2, 1)
+theme_override_fonts/font = ExtResource("3_font_reg")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_opt")
+text = "C) Opção 3"
+alignment = 0
+autowrap_mode = 3
+
+[node name="CodeContainer" type="HBoxContainer" parent="Control/ModalPanel/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="CodeInput" type="LineEdit" parent="Control/ModalPanel/MarginContainer/VBoxContainer/CodeContainer"]
+custom_minimum_size = Vector2(140, 34)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font_bold")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_input")
+placeholder_text = "ex: 2 4 6"
+alignment = 1
+max_length = 8
+
+[node name="SubmitCodeButton" type="Button" parent="Control/ModalPanel/MarginContainer/VBoxContainer/CodeContainer"]
+custom_minimum_size = Vector2(90, 34)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font_bold")
+theme_override_font_sizes/font_size = 11
+text = "Abrir Cadeado"
+
+[node name="FeedbackPanel" type="PanelContainer" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -190.0
+offset_top = -90.0
+offset_right = 190.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_modal")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/FeedbackPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 14
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/FeedbackPanel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="FeedbackTitle" type="Label" parent="Control/FeedbackPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font_bold")
+theme_override_font_sizes/font_size = 13
+text = "🎉 Desafio Concluído!"
+horizontal_alignment = 1
+
+[node name="FeedbackText" type="Label" parent="Control/FeedbackPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.3, 0.3, 0.3, 1)
+theme_override_fonts/font = ExtResource("3_font_reg")
+theme_override_font_sizes/font_size = 10
+text = "Explicação pedagógica aqui..."
+autowrap_mode = 3
+
+[node name="CloseButton" type="Button" parent="Control/FeedbackPanel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font_bold")
+theme_override_font_sizes/font_size = 11
+text = "Continuar"

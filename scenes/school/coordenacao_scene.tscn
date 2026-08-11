@@ -1,0 +1,209 @@
+[gd_scene load_steps=19 format=3 uid="uid://c2c9qf5v8p3x1"]
+
+[ext_resource type="PackedScene" path="res://scenes/characters/player.tscn" id="1_player"]
+[ext_resource type="PackedScene" path="res://scenes/characters/npc_coordenadora.tscn" id="2_coord"]
+[ext_resource type="PackedScene" path="res://scenes/ui/dialogue_box.tscn" id="3_dlgbox"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="4_hud"]
+[ext_resource type="PackedScene" path="res://scenes/ui/challenge_modal.tscn" id="5_modal"]
+[ext_resource type="Script" path="res://scripts/door.gd" id="6_door"]
+[ext_resource type="Script" path="res://scripts/interactable_object.gd" id="7_obj"]
+[ext_resource type="Texture2D" path="res://assets/props/teacher_desk.png" id="8_desk"]
+[ext_resource type="Texture2D" path="res://assets/props/wood_cabinet.png" id="9_cab"]
+[ext_resource type="Texture2D" path="res://assets/props/metal_locker.png" id="10_safe"]
+[ext_resource type="Texture2D" path="res://assets/props/red_sofa.png" id="11_sofa"]
+[ext_resource type="Texture2D" path="res://assets/props/plant_ficus.png" id="12_plant"]
+[ext_resource type="FontFile" path="res://assets/fonts/Montserrat-Bold.ttf" id="13_font"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_top"]
+size = Vector2(340, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_left"]
+size = Vector2(20, 260)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_bottom"]
+size = Vector2(340, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_right_t"]
+size = Vector2(20, 110)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_right_b"]
+size = Vector2(20, 110)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_desk"]
+size = Vector2(60, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_shelf"]
+size = Vector2(30, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sofa"]
+size = Vector2(44, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_door"]
+size = Vector2(20, 40)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_safe"]
+radius = 28.0
+
+[node name="CoordenacaoScene" type="Node2D"]
+y_sort_enabled = true
+
+[node name="MapBackground" type="Node2D" parent="."]
+
+[node name="Floor" type="ColorRect" parent="MapBackground"]
+offset_left = -150.0
+offset_top = -100.0
+offset_right = 150.0
+offset_bottom = 100.0
+color = Color(0.85, 0.77, 0.65, 1)
+
+[node name="AlmoxarifadoSection" type="ColorRect" parent="MapBackground"]
+offset_left = -150.0
+offset_top = -100.0
+offset_right = -40.0
+offset_bottom = 100.0
+color = Color(0.78, 0.70, 0.58, 0.8)
+
+[node name="WallTop" type="ColorRect" parent="MapBackground"]
+offset_left = -150.0
+offset_top = -120.0
+offset_right = 150.0
+offset_bottom = -90.0
+color = Color(0.38, 0.48, 0.35, 1)
+
+[node name="MapWalls" type="StaticBody2D" parent="."]
+
+[node name="Top" type="CollisionShape2D" parent="MapWalls"]
+position = Vector2(0, -100)
+shape = SubResource("RectangleShape2D_wall_top")
+
+[node name="Left" type="CollisionShape2D" parent="MapWalls"]
+position = Vector2(-160, 0)
+shape = SubResource("RectangleShape2D_wall_left")
+
+[node name="Bottom" type="CollisionShape2D" parent="MapWalls"]
+position = Vector2(0, 110)
+shape = SubResource("RectangleShape2D_wall_bottom")
+
+[node name="RightTop" type="CollisionShape2D" parent="MapWalls"]
+position = Vector2(160, -55)
+shape = SubResource("RectangleShape2D_wall_right_t")
+
+[node name="RightBottom" type="CollisionShape2D" parent="MapWalls"]
+position = Vector2(160, 55)
+shape = SubResource("RectangleShape2D_wall_right_b")
+
+[node name="Furniture" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="CoordDesk" type="StaticBody2D" parent="Furniture"]
+position = Vector2(60, -40)
+
+[node name="Sprite2D" type="Sprite2D" parent="Furniture/CoordDesk"]
+texture = ExtResource("8_desk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Furniture/CoordDesk"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_desk")
+
+[node name="FilingCabinet1" type="StaticBody2D" parent="Furniture"]
+position = Vector2(120, -65)
+
+[node name="Sprite2D" type="Sprite2D" parent="Furniture/FilingCabinet1"]
+texture = ExtResource("9_cab")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Furniture/FilingCabinet1"]
+position = Vector2(0, 10)
+shape = SubResource("RectangleShape2D_shelf")
+
+[node name="WaitingSofa" type="StaticBody2D" parent="Furniture"]
+position = Vector2(60, 50)
+
+[node name="Sprite2D" type="Sprite2D" parent="Furniture/WaitingSofa"]
+texture = ExtResource("11_sofa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Furniture/WaitingSofa"]
+shape = SubResource("RectangleShape2D_sofa")
+
+[node name="SchoolSafe" type="StaticBody2D" parent="Furniture"]
+position = Vector2(-100, -65)
+script = ExtResource("7_obj")
+object_name = "Cofre do Almoxarifado"
+hint_text = "[E] Abrir Cofre"
+is_challenge_trigger = true
+challenge_task_id = 3
+challenge_type = "code"
+challenge_title = "🔐 Tarefa 3: O Cofre da Escola"
+challenge_context = "O zelador guardou os novos materiais escolares no armário trancado e deixou as seguintes pistas: \n• O cadeado possui 3 dígitos.\n• O primeiro número é PAR.\n• A soma dos 3 números é 12.\n• Nenhum dígito se repete e estão em ordem CRESCENTE."
+challenge_question = "Qual é a senha de 3 dígitos do cadeado? (ex: 2 4 6)"
+challenge_correct_code = "246"
+challenge_success_feedback = "Cofre aberto com sucesso! Os dígitos 2, 4 e 6 atendem perfeitamente a todas as condições: 2 é par, 2+4+6 = 12, são únicos e estritamente crescentes!"
+
+[node name="Sprite2D" type="Sprite2D" parent="Furniture/SchoolSafe"]
+texture = ExtResource("10_safe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Furniture/SchoolSafe"]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_shelf")
+
+[node name="InteractionArea" type="Area2D" parent="Furniture/SchoolSafe"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Furniture/SchoolSafe/InteractionArea"]
+shape = SubResource("CircleShape2D_safe")
+
+[node name="HintLabel" type="Label" parent="Furniture/SchoolSafe"]
+offset_left = -40.0
+offset_top = -24.0
+offset_right = 40.0
+offset_bottom = -11.0
+theme_override_colors/font_color = Color(0.98, 0.95, 0.8, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_fonts/font = ExtResource("13_font")
+theme_override_font_sizes/font_size = 7
+text = "[E] Cofre"
+horizontal_alignment = 1
+
+[node name="Plant" type="Sprite2D" parent="Furniture"]
+position = Vector2(130, 50)
+texture = ExtResource("12_plant")
+
+[node name="SpawnFromCorridor" type="Marker2D" parent="."]
+position = Vector2(95, 0)
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector2(95, 0)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(2.5, 2.5)
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
+
+[node name="NPCCoordenadora" parent="." instance=ExtResource("2_coord")]
+position = Vector2(60, -15)
+is_intro_scene = false
+
+[node name="DoorToCorridor" type="Area2D" parent="."]
+position = Vector2(150, 0)
+script = ExtResource("6_door")
+target_scene = "res://scenes/school/school_corridor.tscn"
+target_spawn_id = "SpawnFromCoord"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorToCorridor"]
+shape = SubResource("RectangleShape2D_door")
+
+[node name="DoorLabel" type="Label" parent="DoorToCorridor"]
+offset_left = -40.0
+offset_top = -24.0
+offset_right = 40.0
+offset_bottom = -11.0
+theme_override_colors/font_color = Color(0.98, 0.96, 0.88, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_fonts/font = ExtResource("13_font")
+theme_override_font_sizes/font_size = 7
+text = "► Corredor"
+horizontal_alignment = 1
+
+[node name="HUD" parent="." instance=ExtResource("4_hud")]
+
+[node name="DialogueBox" parent="." instance=ExtResource("3_dlgbox")]
+
+[node name="ChallengeModal" parent="." instance=ExtResource("5_modal")]
