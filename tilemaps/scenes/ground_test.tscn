@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://bx2jqpmbfqdj1"]
+
+[ext_resource type="Texture2D" uid="uid://cltxcqt7s8ed5" path="res://Tilemap-pronto/Modern tiles_Free/Interiors_free/32x32/Room_Builder_free_32x32.png" id="1_ngjlr"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2hd8f"]
+texture = ExtResource("1_ngjlr")
+24:6/0 = 0
+23:6/0 = 0
+23:5/0 = 0
+23:4/0 = 0
+26:2/0 = 0
+26:3/0 = 0
+26:4/0 = 0
+26:5/0 = 0
+11:1/0 = 0
+11:2/0 = 0
+11:3/0 = 0
+12:3/0 = 0
+13:3/0 = 0
+13:2/0 = 0
+13:1/0 = 0
+23:2/0 = 0
+23:3/0 = 0
+25:6/0 = 0
+26:6/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_jge76"]
+sources/0 = SubResource("TileSetAtlasSource_2hd8f")
+
+[node name="Node2D" type="Node2D" unique_id=2139626695]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=684577163]
+tile_set = SubResource("TileSet_jge76")
