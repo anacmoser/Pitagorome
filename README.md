@@ -8,13 +8,6 @@ O projeto utiliza elementos de jogos para apresentar conteúdos matemáticos de 
 
 A proposta é integrar o aprendizado de matemática à experiência de jogo, utilizando progressão, desafios e situações práticas para estimular o raciocínio lógico e o envolvimento do jogador.
 
-**Integrantes:**
-
-* Ana Julia Cardoso Moser
-* Eduardo de Lazzari Oliveira
-* Guilherme Pereira de Oliveira
-* João Paulo Queiroz Costa
-
 ---
 
 ## Objetivos
